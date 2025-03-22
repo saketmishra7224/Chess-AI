@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess AI Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Chess AI Game</h1>
+    <p>Wins: {{ rankings["wins"] }} | Losses: {{ rankings["losses"] }}</p>
+    <p>Board State: {{ board }}</p>
+
+    <label for="move">Enter your move (e.g., e2e4):</label>
+    <input type="text" id="move">
+    <label for="difficulty">Select Difficulty:</label>
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium" selected>Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+
+    <button onclick="makeMove()">Make Move</button>
+    
+    <p id="status"></p>
+
+    <script>
+        function makeMove() {
+            let move = document.getElementById("move").value;
+            let difficulty = document.getElementById("difficulty").value;
+            fetch("/move", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ move: move, difficulty: difficulty })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById("status").innerText = data.error;
+                } else if (data.winner) {
+                    document.getElementById("status").innerText = "Game Over: " + data.winner;
+                } else {
+                    document.getElementById("status").innerText = "Move Successful!";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

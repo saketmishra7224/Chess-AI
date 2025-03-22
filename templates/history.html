@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game History</title>
+  </head>
+  <body>
+    <h1>Game History</h1>
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Result</th>
+        <th>Moves</th>
+      </tr>
+      {% for game in games %}
+      <tr>
+        <td>{{ game.date }}</td>
+        <td>{{ game.result }}</td>
+        <td>{{ game.moves }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
