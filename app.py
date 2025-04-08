@@ -21,7 +21,8 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Chess Game")
 
 # Load chess engine
-engine_path = "C:\\Users\\Saket\\OneDrive\\Desktop\\Chess\\stockfish\\stockfish-windows-x86-64-avx2.exe"
+engine_path = r"C:\Users\gours\Downloads\chessss\stockfish\stockfish-windows-x86-64-avx2.exe"
+
 engine = chess.engine.SimpleEngine.popen_uci(engine_path)
 
 # Initialize chess board
